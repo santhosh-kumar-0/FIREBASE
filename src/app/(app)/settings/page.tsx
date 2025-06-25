@@ -7,11 +7,12 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Separator } from '@/components/ui/separator';
-import { useAppContext } from '@/context/AppContext';
+import { useAppContext, type LockType } from '@/context/AppContext';
 import { useToast } from '@/hooks/use-toast';
 import { CheckCircle } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { motion } from 'framer-motion';
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 
 const backgroundOptions = [
   { id: 'bg-background', name: 'Default', value: 'bg-background' },
@@ -36,7 +37,7 @@ const backgroundOptions = [
 ];
 
 export default function SettingsPage() {
-  const { unlockBackground, setUnlockBackground } = useAppContext();
+  const { unlockBackground, setUnlockBackground, lockType, setLockType } = useAppContext();
   const { toast } = useToast();
 
   const handlePasswordChange = (e: React.FormEvent) => {
@@ -121,11 +122,34 @@ export default function SettingsPage() {
           <CardHeader>
             <CardTitle>Security</CardTitle>
             <CardDescription>
-              Change your password for Guardian Lock.
+              Manage your account security settings.
             </CardDescription>
           </CardHeader>
-          <CardContent>
+          <CardContent className="space-y-6">
+            <div>
+              <Label className="font-semibold">Unlock Method</Label>
+              <RadioGroup
+                  value={lockType}
+                  onValueChange={(value) => setLockType(value as LockType)}
+                  className="mt-2"
+              >
+                  <div className="flex items-center space-x-3">
+                      <RadioGroupItem value="password" id="r1" />
+                      <Label htmlFor="r1" className="font-normal">Password</Label>
+                  </div>
+                  <div className="flex items-center space-x-3">
+                      <RadioGroupItem value="face" id="r2" />
+                      <Label htmlFor="r2" className="font-normal">Face ID</Label>
+                  </div>
+                  <div className="flex items-center space-x-3">
+                      <RadioGroupItem value="pattern" id="r3" disabled />
+                      <Label htmlFor="r3" className="font-normal text-muted-foreground">Pattern (coming soon)</Label>
+                  </div>
+              </RadioGroup>
+            </div>
+            <Separator />
             <form onSubmit={handlePasswordChange} className="space-y-4">
+              <p className="font-semibold">Change Password</p>
               <div className="space-y-2">
                 <Label htmlFor="current-password">Current Password</Label>
                 <Input id="current-password" type="password" placeholder="••••••••" />
