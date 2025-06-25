@@ -11,14 +11,12 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from '@/components/ui/tooltip';
-import { useAppContext } from '@/context/AppContext';
 
 export default function Header() {
   const router = useRouter();
-  const { setIsAuthenticated } = useAppContext();
 
   const handleLogout = () => {
-    setIsAuthenticated(false);
+    // In a real app, this would clear session/token
     router.push('/');
   };
 

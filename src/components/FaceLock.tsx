@@ -1,20 +1,16 @@
 'use client';
 
 import React, { useRef, useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
 import { useToast } from '@/hooks/use-toast';
-import { useAppContext } from '@/context/AppContext';
 import { Button } from './ui/button';
 import { Loader2, ShieldAlert } from 'lucide-react';
 import { Alert, AlertTitle, AlertDescription } from './ui/alert';
 
-export default function FaceLock() {
+export default function FaceLock({ onSuccess }: { onSuccess: () => void }) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [hasCameraPermission, setHasCameraPermission] = useState<boolean | null>(null);
   const [isVerifying, setIsVerifying] = useState(false);
   const { toast } = useToast();
-  const router = useRouter();
-  const { setIsAuthenticated } = useAppContext();
 
   useEffect(() => {
     const getCameraPermission = async () => {
@@ -62,12 +58,7 @@ export default function FaceLock() {
     setIsVerifying(true);
     // Simulate face verification
     setTimeout(() => {
-      toast({
-        title: 'Success',
-        description: 'Face recognized. Unlocking...',
-      });
-      setIsAuthenticated(true);
-      router.push('/dashboard');
+      onSuccess();
     }, 2000);
   };
 
