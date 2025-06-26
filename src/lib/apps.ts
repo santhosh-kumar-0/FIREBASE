@@ -41,7 +41,7 @@ export const mockAppsData: App[] = [
   { id: 10, name: 'Calculator', icon: Calculator, locked: false },
   { id: 11, name: 'Calendar', icon: CalendarDays, locked: true },
   { id: 12, name: 'Weather', icon: CloudSun, locked: false },
-  { id: 13, anme: 'Notes', icon: FileText, locked: true },
+  { id: 13, name: 'Notes', icon: FileText, locked: true },
   { id: 14, name: 'Videos', icon: Clapperboard, locked: false },
   { id: 15, name: 'Health', icon: HeartPulse, locked: true },
   { id: 16, name: 'Podcasts', icon: Mic, locked: false },

@@ -37,7 +37,8 @@ const PasswordUnlock = ({ onSuccess }: { onSuccess: () => void }) => {
     setIsUnlocking(true);
 
     setTimeout(() => {
-      if (password === '1234') {
+      // For this simulation, we'll use a simple, hardcoded password.
+      if (password === 'password') {
         onSuccess();
       } else {
         toast({
@@ -121,10 +122,20 @@ export default function DashboardPage() {
   };
 
   const handleUnlockSuccess = () => {
+    if (!unlockRequest) return;
+    
     toast({
       title: 'Success!',
-      description: `Unlocked ${unlockRequest?.name}. Opening app...`,
+      description: `Unlocked ${unlockRequest.name}. The app is now accessible.`,
     });
+
+    // Update the app's state to be unlocked
+    setApps((prevApps) =>
+        prevApps.map((app) =>
+            app.id === unlockRequest.id ? { ...app, locked: false } : app
+        )
+    );
+
     setUnlockRequest(null);
   };
 
@@ -210,7 +221,7 @@ export default function DashboardPage() {
             <DialogDescription>
               {lockType === 'face' 
                 ? 'Position your face in the frame to unlock.' 
-                : 'Enter your password to continue.'}
+                : 'Enter your password to continue. (Hint: the password is "password")'}
             </DialogDescription>
           </DialogHeader>
           {renderLockMethod()}
