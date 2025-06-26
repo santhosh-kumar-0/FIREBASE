@@ -82,20 +82,25 @@ export default function DashboardPage() {
   const { lockType } = useAppContext();
 
   const toggleLock = (id: number) => {
+    const appToToggle = apps.find((app) => app.id === id);
+    if (!appToToggle) return;
+
+    const newLockedState = !appToToggle.locked;
+
+    toast({
+      title: `${appToToggle.name} ${
+        newLockedState ? 'Locked' : 'Unlocked'
+      }`,
+      description: `Access to ${appToToggle.name} is now ${
+        newLockedState ? 'restricted' : 'allowed'
+      }.`,
+      duration: 2000,
+    });
+    
     setApps((prevApps) =>
       prevApps.map((app) => {
         if (app.id === id) {
-          const updatedApp = { ...app, locked: !app.locked };
-          toast({
-            title: `${updatedApp.name} ${
-              updatedApp.locked ? 'Locked' : 'Unlocked'
-            }`,
-            description: `Access to ${updatedApp.name} is now ${
-              updatedApp.locked ? 'restricted' : 'allowed'
-            }.`,
-            duration: 2000,
-          });
-          return updatedApp;
+          return { ...app, locked: newLockedState };
         }
         return app;
       })
