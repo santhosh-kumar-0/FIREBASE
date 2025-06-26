@@ -352,7 +352,7 @@ const mockAppsData = [
     },
     {
         id: 13,
-        anme: 'Notes',
+        name: 'Notes',
         icon: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$file$2d$text$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__FileText$3e$__["FileText"],
         locked: true
     },
@@ -736,7 +736,8 @@ const PasswordUnlock = ({ onSuccess })=>{
         e.preventDefault();
         setIsUnlocking(true);
         setTimeout(()=>{
-            if (password === '1234') {
+            // For this simulation, we'll use a simple, hardcoded password.
+            if (password === 'password') {
                 onSuccess();
             } else {
                 toast({
@@ -761,7 +762,7 @@ const PasswordUnlock = ({ onSuccess })=>{
                             children: "Password"
                         }, void 0, false, {
                             fileName: "[project]/src/app/(app)/dashboard/page.tsx",
-                            lineNumber: 57,
+                            lineNumber: 58,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$input$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Input"], {
@@ -773,18 +774,18 @@ const PasswordUnlock = ({ onSuccess })=>{
                             required: true
                         }, void 0, false, {
                             fileName: "[project]/src/app/(app)/dashboard/page.tsx",
-                            lineNumber: 58,
+                            lineNumber: 59,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/app/(app)/dashboard/page.tsx",
-                    lineNumber: 56,
+                    lineNumber: 57,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/src/app/(app)/dashboard/page.tsx",
-                lineNumber: 55,
+                lineNumber: 56,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["CardFooter"], {
@@ -798,24 +799,24 @@ const PasswordUnlock = ({ onSuccess })=>{
                             className: "ml-2 h-4 w-4"
                         }, void 0, false, {
                             fileName: "[project]/src/app/(app)/dashboard/page.tsx",
-                            lineNumber: 71,
+                            lineNumber: 72,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/app/(app)/dashboard/page.tsx",
-                    lineNumber: 69,
+                    lineNumber: 70,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/src/app/(app)/dashboard/page.tsx",
-                lineNumber: 68,
+                lineNumber: 69,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/app/(app)/dashboard/page.tsx",
-        lineNumber: 54,
+        lineNumber: 55,
         columnNumber: 5
     }, this);
 };
@@ -856,10 +857,16 @@ function DashboardPage() {
         }
     };
     const handleUnlockSuccess = ()=>{
+        if (!unlockRequest) return;
         toast({
             title: 'Success!',
-            description: `Unlocked ${unlockRequest?.name}. Opening app...`
+            description: `Unlocked ${unlockRequest.name}. The app is now accessible.`
         });
+        // Update the app's state to be unlocked
+        setApps((prevApps)=>prevApps.map((app)=>app.id === unlockRequest.id ? {
+                    ...app,
+                    locked: false
+                } : app));
         setUnlockRequest(null);
     };
     const renderLockMethod = ()=>{
@@ -872,12 +879,12 @@ function DashboardPage() {
                         onSuccess: handleUnlockSuccess
                     }, void 0, false, {
                         fileName: "[project]/src/app/(app)/dashboard/page.tsx",
-                        lineNumber: 138,
+                        lineNumber: 149,
                         columnNumber: 13
                     }, this)
                 }, void 0, false, {
                     fileName: "[project]/src/app/(app)/dashboard/page.tsx",
-                    lineNumber: 137,
+                    lineNumber: 148,
                     columnNumber: 11
                 }, this);
             case 'password':
@@ -886,7 +893,7 @@ function DashboardPage() {
                     onSuccess: handleUnlockSuccess
                 }, void 0, false, {
                     fileName: "[project]/src/app/(app)/dashboard/page.tsx",
-                    lineNumber: 143,
+                    lineNumber: 154,
                     columnNumber: 16
                 }, this);
         }
@@ -914,7 +921,7 @@ function DashboardPage() {
                                 children: "Your Applications"
                             }, void 0, false, {
                                 fileName: "[project]/src/app/(app)/dashboard/page.tsx",
-                                lineNumber: 155,
+                                lineNumber: 166,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -922,13 +929,13 @@ function DashboardPage() {
                                 children: "Select which applications you want to secure with Guardian Lock. Click an app to open it."
                             }, void 0, false, {
                                 fileName: "[project]/src/app/(app)/dashboard/page.tsx",
-                                lineNumber: 158,
+                                lineNumber: 169,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/app/(app)/dashboard/page.tsx",
-                        lineNumber: 150,
+                        lineNumber: 161,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -964,20 +971,20 @@ function DashboardPage() {
                                                         children: app.name
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/(app)/dashboard/page.tsx",
-                                                        lineNumber: 182,
+                                                        lineNumber: 193,
                                                         columnNumber: 21
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(app.icon, {
                                                         className: "h-5 w-5 text-muted-foreground"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/(app)/dashboard/page.tsx",
-                                                        lineNumber: 185,
+                                                        lineNumber: 196,
                                                         columnNumber: 21
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/app/(app)/dashboard/page.tsx",
-                                                lineNumber: 181,
+                                                lineNumber: 192,
                                                 columnNumber: 19
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["CardContent"], {
@@ -988,7 +995,7 @@ function DashboardPage() {
                                                         children: app.locked ? 'Locked' : 'Unlocked'
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/(app)/dashboard/page.tsx",
-                                                        lineNumber: 188,
+                                                        lineNumber: 199,
                                                         columnNumber: 21
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -999,45 +1006,45 @@ function DashboardPage() {
                                                             "aria-label": `Lock ${app.name}`
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/app/(app)/dashboard/page.tsx",
-                                                            lineNumber: 192,
+                                                            lineNumber: 203,
                                                             columnNumber: 24
                                                         }, this)
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/(app)/dashboard/page.tsx",
-                                                        lineNumber: 191,
+                                                        lineNumber: 202,
                                                         columnNumber: 21
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/app/(app)/dashboard/page.tsx",
-                                                lineNumber: 187,
+                                                lineNumber: 198,
                                                 columnNumber: 19
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/app/(app)/dashboard/page.tsx",
-                                        lineNumber: 173,
+                                        lineNumber: 184,
                                         columnNumber: 17
                                     }, this)
                                 }, app.id, false, {
                                     fileName: "[project]/src/app/(app)/dashboard/page.tsx",
-                                    lineNumber: 165,
+                                    lineNumber: 176,
                                     columnNumber: 15
                                 }, this))
                         }, void 0, false, {
                             fileName: "[project]/src/app/(app)/dashboard/page.tsx",
-                            lineNumber: 163,
+                            lineNumber: 174,
                             columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/src/app/(app)/dashboard/page.tsx",
-                        lineNumber: 162,
+                        lineNumber: 173,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/app/(app)/dashboard/page.tsx",
-                lineNumber: 149,
+                lineNumber: 160,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$dialog$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Dialog"], {
@@ -1054,32 +1061,32 @@ function DashboardPage() {
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/app/(app)/dashboard/page.tsx",
-                                    lineNumber: 209,
+                                    lineNumber: 220,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$dialog$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["DialogDescription"], {
-                                    children: lockType === 'face' ? 'Position your face in the frame to unlock.' : 'Enter your password to continue.'
+                                    children: lockType === 'face' ? 'Position your face in the frame to unlock.' : 'Enter your password to continue. (Hint: the password is "password")'
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/(app)/dashboard/page.tsx",
-                                    lineNumber: 210,
+                                    lineNumber: 221,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/app/(app)/dashboard/page.tsx",
-                            lineNumber: 208,
+                            lineNumber: 219,
                             columnNumber: 11
                         }, this),
                         renderLockMethod()
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/app/(app)/dashboard/page.tsx",
-                    lineNumber: 207,
+                    lineNumber: 218,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/src/app/(app)/dashboard/page.tsx",
-                lineNumber: 206,
+                lineNumber: 217,
                 columnNumber: 7
             }, this)
         ]
